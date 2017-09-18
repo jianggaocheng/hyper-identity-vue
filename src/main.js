@@ -2,7 +2,7 @@ import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import App from './App.vue'
-import routes from './routes'
+import router from './router'
 import * as fundebug from 'fundebug-javascript';
 
 fundebug.apikey = "ce44c68d47ce8e2608ff7c111c17fb512c59afc6fb24c1e53a0376331aedd06a";
@@ -11,7 +11,7 @@ Vue.use(ElementUI)
 
 new Vue({
     el: '#app',
-    routes,
+    router,
     render: h => h(App)
 });
 

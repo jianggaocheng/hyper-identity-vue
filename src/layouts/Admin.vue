@@ -19,19 +19,33 @@
         </el-col>
         <el-col :span="24" class="main">
             <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
-                <!--导航菜单-->
-                <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router v-show="!collapsed">
-                    <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-                        {{item.name}}
-                    </template>
-                </el-menu>
+                <tutu-menu :collapsed="collapsed"></tutu-menu>
             </aside>
+            <section class="content-container">
+				<div class="grid-content bg-purple-light">
+					<el-col :span="24" class="breadcrumb-container">
+						<strong class="title">{{$route.name}}</strong>
+						<el-breadcrumb separator="/" class="breadcrumb-inner">
+							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+								{{ item.name }}
+							</el-breadcrumb-item>
+						</el-breadcrumb>
+					</el-col>
+					<el-col :span="24" class="content-wrapper">
+						<transition name="fade" mode="out-in">
+							<router-view></router-view>
+						</transition>
+					</el-col>
+				</div>
+			</section>
         </el-col>
     </el-row>
 </template>
 
 <script>
-import config from '../config/config.default'
+import config from '../config/config.default';
+import Menu from './components/Menu.vue';
+
 export default {
     data() {
         return {
@@ -63,12 +77,17 @@ export default {
             this.loginUserName = loginUser.name || loginUser.email;
             this.loginUserAvatar = loginUser.avatar || config.defaultAvatar;
         }
+    },
+    components: {
+        'tutu-menu':Menu,
     }
 }
 </script>
 
 <style lang="scss">
 @import '../style/vars.scss';
+// $lato-font-path: '../../node_modules/lato-font/fonts';
+// @import '../../node_modules/lato-font/scss/lato-font';
 
 .container {
     position: absolute;
