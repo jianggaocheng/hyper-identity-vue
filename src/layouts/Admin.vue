@@ -22,22 +22,22 @@
                 <tutu-menu :collapsed="collapsed"></tutu-menu>
             </aside>
             <section class="content-container">
-				<div class="grid-content bg-purple-light">
-					<el-col :span="24" class="breadcrumb-container">
-						<strong class="title">{{$route.name}}</strong>
-						<el-breadcrumb separator="/" class="breadcrumb-inner">
-							<el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
-								{{ item.name }}
-							</el-breadcrumb-item>
-						</el-breadcrumb>
-					</el-col>
-					<el-col :span="24" class="content-wrapper">
-						<transition name="fade" mode="out-in">
-							<router-view></router-view>
-						</transition>
-					</el-col>
-				</div>
-			</section>
+                <div class="grid-content bg-purple-light">
+                    <el-col :span="24" class="breadcrumb-container">
+                        <strong class="title">{{$route.name}}</strong>
+                        <el-breadcrumb separator="/" class="breadcrumb-inner">
+                            <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+                                {{ item.name }}
+                            </el-breadcrumb-item>
+                        </el-breadcrumb>
+                    </el-col>
+                    <el-col :span="24" class="content-wrapper">
+                        <transition name="fade" mode="out-in">
+                            <router-view></router-view>
+                        </transition>
+                    </el-col>
+                </div>
+            </section>
         </el-col>
     </el-row>
 </template>
@@ -45,6 +45,7 @@
 <script>
 import config from '../config/config.default';
 import Menu from './components/Menu.vue';
+import moment from 'moment'
 
 export default {
     data() {
@@ -79,15 +80,20 @@ export default {
         }
     },
     components: {
-        'tutu-menu':Menu,
+        'tutu-menu': Menu,
+    },
+    filters: {
+        momentDate: function(date) {
+            return moment(date).format('YYYY-MM-DD HH:mm:ss');
+        }
     }
 }
 </script>
 
 <style lang="scss">
 @import '../style/vars.scss';
-// $lato-font-path: '../../node_modules/lato-font/fonts';
-// @import '../../node_modules/lato-font/scss/lato-font';
+$lato-font-path: '../../node_modules/lato-font/fonts';
+@import '../../node_modules/lato-font/scss/lato-font';
 
 .container {
     position: absolute;

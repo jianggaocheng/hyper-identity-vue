@@ -8,23 +8,29 @@ import Dashboard from './pages/Dashboard.vue';
 Vue.use(VueRouter);
 let router = new VueRouter({
     routes: [{
-            path: '/login',
-            name: 'login',
-            component: Login
-        },
-        {
-            path: '/register',
-            name: 'register',
-            component: Register
-        },
-        {
-            path: '/admin',
-            name: 'admin',
-            component: Admin,
-            children: [
-                { path: 'dashboard', component: Dashboard, icon:'el-icon-fa-address-card',name: '个人中心' },
-            ]
-        }
+        path: '/login',
+        name: 'login',
+        component: Login
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: Register
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: Admin,
+        menu: true,
+        children: [
+            {
+                path: 'dashboard',
+                component: Dashboard,
+                iconCls: 'el-icon-fa-address-card',
+                name: '个人中心'
+            },
+        ]
+    }
     ]
 });
 
