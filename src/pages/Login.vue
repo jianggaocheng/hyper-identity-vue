@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { requestLogin } from '../api/loginApi';
+import { requestLogin } from '../api/userApi';
 export default {
     data() {
         return {
@@ -52,7 +52,7 @@ export default {
                     let loginParams = { email: this.loginForm.email, password: this.loginForm.password };
                     requestLogin(loginParams).then(data => {
                         this.logining = false;
-                        let { errCode, errMsg, account, code } = data;
+                        let { errCode, errMsg, user, token, code } = data;
                         if (errCode) {
                             this.$message({
                                 message: errMsg,
@@ -60,18 +60,20 @@ export default {
                             });
                             return;
                         } else {
-                            sessionStorage.setItem('account', JSON.stringify(account));
-                            this.$router.push({ path: '/admin' });
+                            _this.$store.commit('SET_USER', user);
+                            _this.$store.commit('SET_TOKEN', token);
+                            this.$router.push({ path: '/admin/dashboard' });
                         }
                     }).catch(err => {
-                        this.logining = false;
-                        this.$message({
+                        _this.logining = false;
+                        _this.$message({
                             message: '未知错误',
                             type: 'error'
                         });
+                        fundebug.notifyError(err);
                     });
                 } else {
-                    alert('invalid');
+                    console.log('Login form invalid');
                 }
             });
         },

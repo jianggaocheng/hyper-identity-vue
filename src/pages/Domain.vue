@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import _ from 'lodash';
+
 export default {
     data() {
         return {
@@ -78,7 +78,10 @@ export default {
     },
     mounted() {
         let _this = this;
-        _this.loginUser = _.cloneDeep(_this.$store.state.user.user);
+        let loginUser = sessionStorage.getItem('user');
+        if (loginUser) {
+            _this.loginUser = JSON.parse(loginUser);
+        }
     },
 }
 </script>

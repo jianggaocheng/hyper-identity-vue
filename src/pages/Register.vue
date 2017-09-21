@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { requestRegister } from '../api/loginApi';
+import { requestRegister } from '../api/userApi';
 export default {
     data() {
         let checkConfirmPassword = (rule, value, callback) => {
@@ -68,7 +68,7 @@ export default {
                     let regParams = { email: this.regForm.email, password: this.regForm.password, confirmPassword: this.regForm.confirmPassword };
                     requestRegister(regParams).then(data => {
                         this.logining = false;
-                        let { errCode, errMsg, account, code } = data;
+                        let { errCode, errMsg, user, code } = data;
                         if (errCode) {
                             this.$message({
                                 message: errMsg,

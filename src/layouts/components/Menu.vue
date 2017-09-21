@@ -1,5 +1,5 @@
 <template>
-    <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router v-show="!collapsed">
+    <el-menu :default-active="$route.path" class="el-menu-vertical-demo" unique-opened router v-if="!collapsed">
         <template v-for="(item,index) in menuList">
             <el-submenu :index="index+''" v-if="item.children && item.children.length>=1">
                 <template slot="title"><i :class="item.iconCls"></i>{{item.name}}</template>

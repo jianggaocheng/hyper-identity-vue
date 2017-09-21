@@ -45,7 +45,6 @@
 <script>
 import config from '../config/config.default';
 import Menu from './components/Menu.vue';
-import moment from 'moment'
 
 export default {
     data() {
@@ -62,7 +61,7 @@ export default {
             this.$confirm('确认退出吗?', '提示', {
                 type: 'warning'
             }).then(() => {
-                sessionStorage.removeItem('user');
+                _this.$store.commit('LOGOUT');
                 _this.$router.push('/login');
             }).catch(() => {
             });
@@ -72,9 +71,9 @@ export default {
         },
     },
     mounted() {
-        var loginUser = sessionStorage.getItem('account');
+        let _this = this;
+        let loginUser = _this.$store.state.user.user;
         if (loginUser) {
-            loginUser = JSON.parse(loginUser);
             this.loginUserName = loginUser.name || loginUser.email;
             this.loginUserAvatar = loginUser.avatar || config.defaultAvatar;
         }
@@ -82,11 +81,7 @@ export default {
     components: {
         'tutu-menu': Menu,
     },
-    filters: {
-        momentDate: function(date) {
-            return moment(date).format('YYYY-MM-DD HH:mm:ss');
-        }
-    }
+
 }
 </script>
 

@@ -1,17 +1,17 @@
-import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-import App from './App.vue'
-import router from './router'
-import * as fundebug from 'fundebug-javascript';
-
-fundebug.apikey = "ce44c68d47ce8e2608ff7c111c17fb512c59afc6fb24c1e53a0376331aedd06a";
+import Vue from 'vue';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-default/index.css';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import moment from 'moment';
 
 Vue.use(ElementUI)
 
 new Vue({
     el: '#app',
     router,
+    store,
     render: h => h(App)
 });
 
@@ -36,3 +36,8 @@ Vue.config.errorHandler = function(err, vm, info) {
         }
     });
 };
+
+// Register global filter
+Vue.filter('momentDate', function (date) {
+    return moment(date).format('YYYY-MM-DD HH:mm:ss');
+})
