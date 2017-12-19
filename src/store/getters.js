@@ -1,5 +1,10 @@
 const getters = {
-    token: state => state.user.token,
+  token: (state) => {
+    let token = null;
+    token = state.user.token;
+
+    return token;
+  }
 };
 
 export default getters;

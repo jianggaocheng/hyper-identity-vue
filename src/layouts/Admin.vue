@@ -24,7 +24,6 @@
             <section class="content-container">
                 <div class="grid-content bg-purple-light">
                     <el-col :span="24" class="breadcrumb-container">
-                        <strong class="title">{{$route.name}}</strong>
                         <el-breadcrumb separator="/" class="breadcrumb-inner">
                             <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
                                 {{ item.name }}
@@ -46,6 +45,7 @@
 import config from '../config/config.default';
 import Menu from './components/Menu.vue';
 
+
 export default {
     data() {
         return {
@@ -58,12 +58,12 @@ export default {
     methods: {
         handleLogout: function(ev) {
             var _this = this;
-            this.$confirm('确认退出吗?', '提示', {
+            _this.$confirm('确认退出吗?', '提示', {
                 type: 'warning'
-            }).then(() => {
+            }).then((result) => {
                 _this.$store.commit('LOGOUT');
                 _this.$router.push('/login');
-            }).catch(() => {
+            }).catch((err) => {
             });
         },
         collapse: function() {
@@ -72,6 +72,7 @@ export default {
     },
     mounted() {
         let _this = this;
+   
         let loginUser = _this.$store.state.user.user;
         if (loginUser) {
             this.loginUserName = loginUser.name || loginUser.email;
@@ -99,7 +100,7 @@ $lato-font-path: '../../node_modules/lato-font/fonts';
         height: 60px;
         line-height: 60px;
         background: $color-primary;
-        color: #fff;
+        color: #fff ; 
         .userinfo {
             text-align: right;
             padding-right: 35px;
@@ -203,6 +204,9 @@ $lato-font-path: '../../node_modules/lato-font/fonts';
                 box-sizing: border-box;
             }
         }
+    }
+    .main-content {
+        margin-top: 10px;
     }
 }
 </style>
