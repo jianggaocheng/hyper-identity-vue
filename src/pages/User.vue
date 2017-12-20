@@ -1,17 +1,23 @@
 <template>
   <section>
-    <tutu-table entity="roomType" :col-configs="colConfigs" ref="tutuTable" :dialogTemp.sync="dialogTemp">
+    <tutu-table entity="user" :col-configs="colConfigs" ref="tutuTable" :dialogTemp.sync="dialogTemp">
       <el-table-column slot="opt">
         <template slot-scope="{ row }">
               <el-button size="small" @click.native="$refs.tutuTable.handleEdit(row)">编辑</el-button>
               <el-button type="danger" size="small" @click.native="$refs.tutuTable.handleDel(row)">删除</el-button>
-</template>
+        </template>
       </el-table-column>
-<template slot="form-items">
-  <el-form-item label="房间类型" prop="name">
-    <el-input v-model="dialogTemp.name" auto-complete="off"></el-input>
-  </el-form-item>
-</template>
+    <template slot="form-items">
+      <el-form-item label="姓名" prop="name">
+        <el-input v-model="dialogTemp.name" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="Email" prop="email">
+        <el-input v-model="dialogTemp.email" auto-complete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" prop="newPassword">
+        <el-input v-model="dialogTemp.newPassword" auto-complete="off"></el-input>
+      </el-form-item>
+    </template>
     </tutu-table>
   </section>
 </template>
@@ -28,6 +34,10 @@ export default {
         label: "名称"
       },
       {
+        prop: "email",
+        label: "Email"
+      },
+      {
         slot: "opt"
       }
     ];
@@ -36,7 +46,7 @@ export default {
         name: [
           {
             required: true,
-            message: "请输入房间类型",
+            message: "请输入姓名",
             trigger: "blur"
           }
         ]
@@ -48,8 +58,6 @@ export default {
     };
   },
   methods: {
-    getMenus: function() {
-    }
   },
   mounted() {
   },

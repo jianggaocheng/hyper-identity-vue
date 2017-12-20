@@ -21,7 +21,7 @@
           <el-input v-model="dialogTemp.sort" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="父菜单">
-          <el-select v-model="dialogTemp.parentId" placeholder="请选择">
+          <el-select v-model="dialogTemp.parentId" clearable placeholder="请选择">
             <el-option
               v-for="item in rootMenus"
               :key="item.value"

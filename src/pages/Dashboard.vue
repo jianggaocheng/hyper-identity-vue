@@ -1,6 +1,6 @@
 <template>
   <section>
-    <p class="page-title">房态查看
+    <p class="page-title">用户中心
     </p>
   </section>
 </template>
@@ -12,4 +12,3 @@
 <style scoped lang="scss">
 
 </style>
-

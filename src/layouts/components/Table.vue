@@ -17,7 +17,7 @@
       <template v-for="colConfig in colConfigs">
                       <slot v-if="colConfig.slot" :name="colConfig.slot"></slot>
                       <el-table-column v-bind="colConfig"></el-table-column>
-</template>
+      </template>
   </el-table>
   <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-sizes="[10, 20, 50, 100]" :current-page="1" :page-size="limit" :total="total" layout="total, sizes, prev, pager, next, jumper" style="float:right;">
   </el-pagination>
@@ -100,8 +100,6 @@ export default {
       }).then(() => {
         this.listLoading = true;
 
-
-        
         this.listLoading = false;
       });
     },
@@ -123,6 +121,7 @@ export default {
     handleSubmit() {
       let _this = this;
 
+      debugger;
       _this.$refs["dialogForm"].validate(valid => {
         if (valid) {
           if (_this.dialogStatus == "create") {
@@ -165,6 +164,14 @@ export default {
           } else if (this.dialogStatus == "update") {
             this.dialogFormLoading = true;
             let para = Object.assign({}, this.dialogTempCom);
+            
+            // 空字符转换成null
+            _.forEach(para, function(n, key) {
+              if (n == '') {
+                para[key] = null;
+              }
+            });
+
             commonUpdate(_this.entity, para)
               .then(data => {
                 this.dialogFormLoading = false;
@@ -212,9 +219,8 @@ export default {
     dialogFormVisible: function(val) {
       let _this = this;
       if (!val) {
-        
         setTimeout(function() {
-         _this.$emit("update:dialogTemp", _.cloneDeep(_this.dialogTempCopy));
+          _this.$emit("update:dialogTemp", _.cloneDeep(_this.dialogTempCopy));
         }, 100);
       }
     }

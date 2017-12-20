@@ -8,14 +8,12 @@ import SubMenu from './layouts/SubMenu.vue';
 import Dashboard from './pages/Dashboard.vue';
 import Role from './pages/system/Role.vue';
 import Menu from './pages/system/Menu.vue';
-import Room from './pages/room/Room.vue';
-import RoomType from './pages/room/RoomType.vue';
-import Floor from './pages/room/Floor.vue';
 import Domain from './pages/Domain.vue';
-import DeviceType from './pages/device/DeviceType.vue';
+import User from './pages/User.vue';
 import Setup from './pages/Setup.vue';
 import Page404 from './pages/404.vue';
 import { verifyToken } from '~/api/userApi';
+import config from '~/config/config.json'
 
 Vue.use(VueRouter);
 let router = new VueRouter({
@@ -26,7 +24,7 @@ let router = new VueRouter({
     },
     {
         path: '/admin',
-        name: '客房控制系统',
+        name: config.sysNameZH,
         redirect: '/admin/dashboard',
         component: Admin,
         children: [{
@@ -40,25 +38,9 @@ let router = new VueRouter({
             component: Domain,
         },
         {
-            path: 'room',
-            name: '房间管理',
-            component: SubMenu,
-            children: [{
-                path: 'room',
-                component: Room,
-                name: '房间'
-            },
-            {
-                path: 'roomType',
-                component: RoomType,
-                name: '房间类型'
-            },
-            {
-                path: 'floor',
-                component: Floor,
-                name: '楼层'
-            },
-            ]
+            path: 'users',
+            name: '用户管理',
+            component: User,
         },
         {
             path: 'system',
